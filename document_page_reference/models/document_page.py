@@ -65,6 +65,15 @@ class DocumentPage(models.Model):
     def _compute_content_parsed(self):
         for record in self:
             record.content_parsed = record.get_content()
+            record.content = record.content_parsed
+            # content = record.get_content()
+            # if content == "<p>" and self.content != "<p>":
+            #     _logger.error("Template from page with id = %s cannot be processed correctly"
+            #         % self.id
+            #     )
+            #     content = self.content
+            # record.content_parsed = content
+            # record.content = record.content_parsed
 
     @api.constrains("reference")
     def _check_reference(self):
@@ -98,7 +107,7 @@ class DocumentPage(models.Model):
         if self.env.context.get("raw_reference", False):
             return html_escape(element.display_name)
         text = """<a href="#" class="oe_direct_line"
-        data-oe-model="%s" data-oe-id="%s" name="%s">%s</a>
+        t-att-data-oe-model="%s" t-att-data-oe-id="%s" t-out="%s">%s</a>
         """
         if not element:
             text = "<i>%s</i>" % text

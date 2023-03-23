@@ -9,10 +9,12 @@
         <field name="arch" type="xml">
             <xpath expr="//h1" position="before">
                 <h2>
-                    <field
-                        name="reference"
-                        placeholder="internal_reference (autofilled if not value is provided)"
-                    />
+                    <group>
+                        <field
+                            name="reference"
+                            placeholder="internal_reference (autofilled if not value is provided)"
+                        />
+                    </group>
                 </h2>
             </xpath>
             <field name="content" position="attributes">
@@ -33,7 +35,8 @@
         <field name="inherit_id" ref="document_page.view_wiki_menu_form" />
         <field name="arch" type="xml">
             <field name="content" position="attributes">
-                <attribute name="invisible">1</attribute>
+                <!-- <attribute name="invisible">1</attribute> -->
+                <attribute name="class">oe_edit_only</attribute>
             </field>
             <field name="content" position="before">
                 <field
