@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="document_page_reference_assets_edit">
+        <t t-call-assets="web_editor.assets_wysiwyg" t-js="false"/>
+    </template>
+    <!-- <template id="assets_backend" name="document_page_reference assets" inherit_id="web_editor.wysiwyg_iframe_editor_assets">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/document_page_reference/static/src/js/wysiwyg.js"></script>
+        </xpath>
+    </template> -->
+</odoo>

@@ -64,15 +64,15 @@ class DocumentPage(models.Model):
     @api.depends("history_head")
     def _compute_content_parsed(self):
         for record in self:
-            record.content_parsed = record.get_content()
-            record.content = record.content_parsed
-            # content = record.get_content()
-            # if content == "<p>" and self.content != "<p>":
-            #     _logger.error("Template from page with id = %s cannot be processed correctly"
-            #         % self.id
-            #     )
-            #     content = self.content
-            # record.content_parsed = content
+            # record.content_parsed = record.get_content()
+            # record.content = record.content_parsed
+            content = record.get_content()
+            if content == "<p>" and self.content != "<p>":
+                _logger.error("Template from page with id = %s cannot be processed correctly"
+                    % self.id
+                )
+                content = self.content
+            record.content_parsed = content
             # record.content = record.content_parsed
 
     @api.constrains("reference")
@@ -106,7 +106,10 @@ class DocumentPage(models.Model):
         element = self._get_document(code)
         if self.env.context.get("raw_reference", False):
             return html_escape(element.display_name)
-        text = """<a href="#" class="oe_direct_line"
+        # text = """<a href="#" class="oe_direct_line"t = """<a href="#" class="oe_direct_line"
+        # data-oe-model="%s" data-oe-id="%s" name="%s">%s</a>
+        # """
+        text = """<a href="#" class="btn btn-link oe_direct_line"
         t-att-data-oe-model="%s" t-att-data-oe-id="%s" t-out="%s">%s</a>
         """
         if not element:
@@ -118,7 +121,7 @@ class DocumentPage(models.Model):
             html_escape(element.display_name or code),
         )
         return res
-
+    
     def _get_template_variables(self):
         return {"ref": self.get_reference}
 
@@ -129,7 +132,9 @@ class DocumentPage(models.Model):
             template = mako_env.from_string(tools.ustr(content))
             return template.render(self._get_template_variables())
         except Exception:
-            _logger.error("Template from page %s cannot be processed" % self.id)
+            _logger.error(
+                "Template from page with id = %s cannot be processed" % self.id
+            )
             return self.content
 
     def get_raw_content(self):

@@ -13,10 +13,14 @@
     "data": [
         "views/document_page.xml",
         "views/report_document_page.xml",
+        "views/assets.xml",
     ],
     "assets": {
         "web.assets_backend": [
-            "document_page_reference/static/src/js/**/*",
+            "document_page_reference/static/src/js/editor.js",
+        ],
+        'web_editor.assets_wysiwyg': [
+            'document_page_reference/static/src/js/wysiwyg.js',
         ],
     },
     "maintainers": ["etobella"],
