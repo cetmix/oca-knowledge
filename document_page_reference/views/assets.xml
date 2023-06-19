@@ -2,8 +2,9 @@
 <odoo>
     <template id="document_page_reference_assets_edit">
         <t t-call-assets="web_editor.assets_wysiwyg" t-js="false"/>
+        <t t-call-assets="web.assets_backend" t-js="false"/>
     </template>
-    <!-- <template id="assets_backend" name="document_page_reference assets" inherit_id="web_editor.wysiwyg_iframe_editor_assets">
+    <!-- <template id="assets_wysiwyg" name="document_page_reference assets" inherit_id="web_editor.wysiwyg_iframe_editor_assets">
         <xpath expr="." position="inside">
             <script type="text/javascript" src="/document_page_reference/static/src/js/wysiwyg.js"></script>
         </xpath>

@@ -17,10 +17,10 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "document_page_reference/static/src/js/editor.js",
+            "document_page_reference/static/src/js/editor_1.js",
         ],
         'web_editor.assets_wysiwyg': [
-            'document_page_reference/static/src/js/wysiwyg.js',
+            # 'document_page_reference/static/src/js/wysiwyg.js',
         ],
     },
     "maintainers": ["etobella"],

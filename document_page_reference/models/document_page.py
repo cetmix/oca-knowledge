@@ -73,7 +73,6 @@ class DocumentPage(models.Model):
                 )
                 content = self.content
             record.content_parsed = content
-            # record.content = record.content_parsed
 
     @api.constrains("reference")
     def _check_reference(self):
@@ -106,10 +105,10 @@ class DocumentPage(models.Model):
         element = self._get_document(code)
         if self.env.context.get("raw_reference", False):
             return html_escape(element.display_name)
-        # text = """<a href="#" class="oe_direct_line"t = """<a href="#" class="oe_direct_line"
+        # text = """<a href="#" class="oe_direct_line"
         # data-oe-model="%s" data-oe-id="%s" name="%s">%s</a>
         # """
-        text = """<a href="#" class="btn btn-link oe_direct_line"
+        text = """<a href="#" class="oe_direct_line"
         t-att-data-oe-model="%s" t-att-data-oe-id="%s" t-out="%s">%s</a>
         """
         if not element:
