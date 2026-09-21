@@ -2,6 +2,7 @@ import {Component, onWillStart, useState} from "@odoo/owl";
 import {Chatter} from "@mail/chatter/web_portal/chatter";
 import {loadJS} from "@web/core/assets";
 import {useService} from "@web/core/utils/hooks";
+import {user} from "@web/core/user";
 
 export class AttachmentGooglePicker extends Component {
     static template = "document_url_google_drive.GooglePickerUrl";
@@ -16,7 +17,6 @@ export class AttachmentGooglePicker extends Component {
     setup() {
         super.setup();
         this.orm = useService("orm");
-        this.user = useService("user");
         this.state = useState({
             pickerInited: false,
             gisInited: false,
@@ -75,7 +75,7 @@ export class AttachmentGooglePicker extends Component {
 
     async getUserAuthParams() {
         const res = await this.orm.call("res.users", "get_google_picker_params", [
-            this.user.userId,
+            user.userId,
         ]);
         if (!res) {
             return;
@@ -91,7 +91,7 @@ export class AttachmentGooglePicker extends Component {
 
     async saveUserAuthAccessToken() {
         await this.orm.call("res.users", "save_google_picker_access_token", [
-            this.user.userId,
+            user.userId,
             this.state.accessToken,
             this.state.expiresDate,
         ]);
